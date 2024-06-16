@@ -1,0 +1,41 @@
+<%layout("layouts/boilerplate") %>
+<div class="row">
+    <h1 class = "text-center">Edit Campground</h1>
+    <div class = "col-6 offset-3">
+        <form action="/campgrounds/<%= campground._id%>?_method=PUT" method = "post" novalidate class="needs-validation">
+            <div class = "mb-3">
+                <label for="title" class = "form-label">Title</label>
+                <input type="text" id = "title" name = "campground[title]" value = "<%=campground.title %>" class = "form-control" required>
+            </div>
+            <div class = "mb-3">
+                <label for="location" class = "form-label">Location</label>
+                <input type="text" id = "location" name = "campground[location]" value = "<%=campground.location%>" class = "form-control" required>
+            </div>
+
+            <div class = "mb-3">
+                <label for="price" class = "form-label">Price</label>
+                <input type="text" id = "price" name = "campground[price]" value = "<%=campground.price%>" class = "form-control" required>
+            </div>
+
+            <div class = "mb-3">
+                <label for="url" class = "form-label">Image-url</label>
+                <input type="text" id = "url" name = "campground[url]" value = "<%=campground.image%>" class = "form-control" required>
+            </div>
+
+            <div class = "mb-3">
+                <label for="description" class = "form-label">Description</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name = "campground[description]" required>
+                    <%=campground.description %>
+                </textarea>
+            </div>
+            <button class = "btn btn-success mb-3">Update Campground</button>
+            <br>
+            <a href="/campgrounds">All Campgrounds</a>
+        </form>
+       
+        <br>
+       
+
+    
+    </div>
+</div>
