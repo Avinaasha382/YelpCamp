@@ -5,9 +5,13 @@ const ejsMate = require("ejs-mate");
 const ExpressError = require("./utilities/errorClass");
 const session  = require("express-session");
 const flash = require("connect-flash");
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
 
 const campgrounds = require("./routes/campgrounds");
 const reviews = require("./routes/reviews");
+const users = require("./routes/users");
+
 mongoose.connect('mongodb://127.0.0.1:27017/yelp-camp')
 .then(() => {
     console.log("Connection Successful!!")
@@ -18,6 +22,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/yelp-camp')
 
 const Campground = require("./models/campgrounds");
 const Review = require("./models/review");
+const User = require("./models/user");
 let methodOverride = require('method-override');
 app.use(methodOverride('_method'));
 
@@ -31,6 +36,13 @@ app.use(session({secret:"This is a secret",resave:false,saveUninitialized:true,c
 }}));
 
 
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 app.use(flash());
 
 app.set("view engine","ejs");
@@ -43,9 +55,15 @@ app.use((req,res,next) => {
     next();
 })
 
-app.use("/campgrounds/:id/reviews",reviews);
-app.use("/campgrounds",campgrounds);
+app.use("/campgrounds/:id/reviews",reviews); 
 
+/*  i) /campgrounds(get)
+    ii) /campgrounds/new(get)
+    ii) /campgrounds/:id (delete)
+    iii) /campgrounds/:id (put)    
+    */
+app.use("/campgrounds",campgrounds);
+app.use("/",users);
 
 
 
