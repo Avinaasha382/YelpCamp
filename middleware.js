@@ -1,5 +1,6 @@
 const Campground = require("./models/campgrounds");
 const Review = require("./models/review");
+const {CampgroundSchema,ReviewSchema} = require("./schemas");
 
 function isLoggedIn(req,res,next) {
     if(req.isAuthenticated())
@@ -33,6 +34,32 @@ async function isReviewAuthor(req,res,next) {
     next();
 }
 
+function validateCampground(req,res,next) {
+    const result = CampgroundSchema.validate(req.body);
+    if(result.error)
+    {
+      return next(new ExpressError(result.error,400));
+    }
+    else
+    {
+     next();
+    }
+}
+
+function validateReview(req,res,next) {
+    const result = ReviewSchema.validate(req.body);
+    if(result.error)
+    {
+        return next(new ExpressError(result.error,400));
+    }
+    else
+    {
+        next();
+    }
+}
+
 module.exports.isLoggedIn = isLoggedIn;
 module.exports.isAuthor = isAuthor;
 module.exports.isReviewAuthor = isReviewAuthor;
+module.exports.validateCampground = validateCampground;
+module.exports.validateReview = validateReview;

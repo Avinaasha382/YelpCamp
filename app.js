@@ -20,8 +20,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/yelp-camp')
     console.log("Error",err)
 })
 
-const Campground = require("./models/campgrounds");
-const Review = require("./models/review");
+
 const User = require("./models/user");
 let methodOverride = require('method-override');
 app.use(methodOverride('_method'));
