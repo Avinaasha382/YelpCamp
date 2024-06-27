@@ -8,9 +8,10 @@
             <p class = "card-text mt-3"><%=campground.description %></p>
             <ul class = "list-group list-group-flush"> 
                 <li class="list-group-item"><b>Price:$</b><%=campground.price %>/night</li>
-
+                <li class = "list-group-item"><b>Author:</b><%= campground.author.username%></li>
             </ul>
            <div class = "card-body">
+                <% if(campground.author.equals(currUser)) { %>
                 <a class = "btn btn-primary" href="/campgrounds">All Campgrounds</a>
                 <a class = "btn btn-success" href="/campgrounds/<%=campground._id%>/edit">Edit Campground</a>
                 <p>
@@ -18,10 +19,12 @@
                         <button class = "btn btn-danger">Delete Campground</button>
                     </form>
                 </p>
+                <% }%>
             </div>
         </div>
     </div>
     <div class="col-6">
+        <% if(currUser) {%>
         <form action="/campgrounds/<%=campground._id%>/reviews" class = "mb-3 needs-validation" method = "post" novalidate >
             <div class = "mb-3">
                 <label for="rating" class = "form-label">Rating</label>
@@ -34,15 +37,19 @@
             </div>
             <button class = "btn btn-success">Submit!!</button>
         </form>
+        <% }%>
         <div class = "mb-3">
             <% for(let review of campground.reviews) {%>
                 <div class="card mb-3">
                     <div class="card-body">
                         <h5 class = "card-title ">Rating: <%=review.rating%></h5>
+                        <p class = "card-text mt-3">Author: <%= review.author.username%></p>
                         <p class = "card-text mt-3">Review: <%=review.body %></p>
+                        <% if(review.author.equals(currUser)) { %>
                         <form action="/campgrounds/<%=campground._id%>/reviews/<%=review._id%>?_method=DELETE" method = "post">
                             <button class = "btn btn-danger btn-sm">Delete Review</button>
                         </form>
+                        <% }%>
                     </div>
                 </div>
             <% }%>

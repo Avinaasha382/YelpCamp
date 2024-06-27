@@ -50,18 +50,15 @@ app.use(express.static("public"));
 app.engine("ejs",ejsMate);
 
 app.use((req,res,next) => {
+   
     res.locals.success = req.flash("success");
     res.locals.error = req.flash("error");
+    res.locals.currUser = req.user;
+    
     next();
 })
 
 app.use("/campgrounds/:id/reviews",reviews); 
-
-/*  i) /campgrounds(get)
-    ii) /campgrounds/new(get)
-    ii) /campgrounds/:id (delete)
-    iii) /campgrounds/:id (put)    
-    */
 app.use("/campgrounds",campgrounds);
 app.use("/",users);
 

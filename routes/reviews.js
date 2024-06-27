@@ -5,7 +5,7 @@ const Review = require("../models/review");
 const wrapError = require("../utilities/wrapError");
 const ExpressError = require("../utilities/errorClass");
 const {ReviewSchema} = require("../schemas.js");
-
+const {isLoggedIn,isAuthor,isReviewAuthor} = require("../middleware");
 
 const validateReview = function(req,res,next) {
     const result = ReviewSchema.validate(req.body);
@@ -20,10 +20,11 @@ const validateReview = function(req,res,next) {
 }
 
 
-router.post("/",validateReview,wrapError(async(req,res,next) => {
+router.post("/",isLoggedIn,validateReview,wrapError(async(req,res,next) => {
     const campground = await Campground.findById(req.params.id);
     const review = new Review({body:req.body.review.body,rating:req.body.review.rating});
     campground.reviews.push(review);
+    review.author = req.user;
     await campground.save();
     await review.save();
     res.redirect(`/campgrounds/${campground._id}`);
@@ -31,7 +32,7 @@ router.post("/",validateReview,wrapError(async(req,res,next) => {
 
 
 
-router.delete("/:reviewId",wrapError(async(req,res,next) => {
+router.delete("/:reviewId",isLoggedIn,isReviewAuthor,wrapError(async(req,res,next) => {
     console.log("INSIDE DELETE!!")
     const {id,reviewId} = req.params;
     const campGround = await Campground.findByIdAndUpdate(id,{$pull:{reviews:reviewId}});
