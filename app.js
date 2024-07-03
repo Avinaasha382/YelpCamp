@@ -68,6 +68,10 @@ app.use("/campgrounds/:id/reviews",reviews);
 app.use("/campgrounds",campgrounds);
 app.use("/",users);
 
+app.get("/home",(req,res,next) => {
+    res.render("home.ejs");
+})
+
 
 
 app.all("*",(req,res,next) => {
