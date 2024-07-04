@@ -7,8 +7,6 @@ if(process.env.NODE_ENV!=="production")
 
 
 
-
-
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -22,8 +20,10 @@ const LocalStrategy = require("passport-local");
 const campgrounds = require("./routes/campgrounds");
 const reviews = require("./routes/reviews");
 const users = require("./routes/users");
+const MongoDBStore = require("connect-mongo")(session);
 
-mongoose.connect('mongodb://127.0.0.1:27017/yelp-camp')
+const dbUrl = process.env.DB_URL;
+mongoose.connect(dbUrl)
 .then(() => {
     console.log("Connection Successful!!")
 })
@@ -39,7 +39,13 @@ app.use(mongoSanitize());
 
 app.use(express.urlencoded({extended:true}));
 
-app.use(session({secret:"This is a secret",resave:false,saveUninitialized:true,cookie:{
+const store = new MongoDBStore({
+    url:dbUrl,
+    secret:"This is a secret",
+    touchAfter:24*60*60
+})
+
+app.use(session({store,secret:"This is a secret",resave:false,saveUninitialized:true,cookie:{
     expires:Date.now() + 1000*60*60*24*7,
     maxAge:7*24*60*60*1000,
     httpOnly:true
