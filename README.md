@@ -22,3 +22,13 @@
     <li><strong>Authentication</strong>: Passport.js</li>
     <li><strong>Other</strong>: Method-Override, Connect-Flash, Express-Session</li>
 </ul>
+
+<h2>Usage</h2>
+<ul>
+    <li><strong>Create Account</strong>: Sign up to create, edit, and review campgrounds.</li>
+    <li><strong>Create Campground</strong>: Share details about your favorite camping spots.</li>
+    <li><strong>Review Campgrounds</strong>: Leave reviews and ratings for campgrounds you’ve visited.</li>
+    <li><strong>Manage Campgrounds</strong>: Edit or delete your own campgrounds and reviews.</li>
+</ul>
+
+<h3>I have deployed the website using Render:  <a href = "https://yelpcamp-lv5y.onrender.com">Check it out!</a></h3>
