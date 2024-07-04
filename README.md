@@ -13,3 +13,12 @@
   <li><b>Data Validation and Sanitization:</b> Ensure data integrity and security.</li>
   <li><b>Schema Validation and Error management: </b>Ensure integrity of schema using joi and proper error management using a user defined error class</li>
 </ul>
+
+<h2>Technologies Used</h2>
+<ul>
+    <li><strong>Backend</strong>: Node.js, Express</li>
+    <li><strong>Frontend</strong>: EJS, Bootstrap</li>
+    <li><strong>Database</strong>: MongoDB, Mongoose</li>
+    <li><strong>Authentication</strong>: Passport.js</li>
+    <li><strong>Other</strong>: Method-Override, Connect-Flash, Express-Session</li>
+</ul>
