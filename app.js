@@ -1,7 +1,11 @@
+const mongoSanitize = require('express-mongo-sanitize');
+
 if(process.env.NODE_ENV!=="production")
 {
     require("dotenv").config();
 }
+
+
 
 
 
@@ -31,7 +35,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/yelp-camp')
 const User = require("./models/user");
 let methodOverride = require('method-override');
 app.use(methodOverride('_method'));
-
+app.use(mongoSanitize());
 
 app.use(express.urlencoded({extended:true}));
 
@@ -68,7 +72,7 @@ app.use("/campgrounds/:id/reviews",reviews);
 app.use("/campgrounds",campgrounds);
 app.use("/",users);
 
-app.get("/home",(req,res,next) => {
+app.get("/",(req,res,next) => {
     res.render("home.ejs");
 })
 

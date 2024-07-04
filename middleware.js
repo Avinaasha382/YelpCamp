@@ -1,6 +1,6 @@
 const Campground = require("./models/campgrounds");
 const Review = require("./models/review");
-const {CampgroundSchema,ReviewSchema} = require("./schemas");
+const {campgroundSchema,reviewSchema} = require("./schemas");
 const ExpressError = require("./utilities/errorClass");
 
 function isLoggedIn(req,res,next) {
@@ -36,7 +36,7 @@ async function isReviewAuthor(req,res,next) {
 }
 
 function validateCampground(req,res,next) {
-    const result = CampgroundSchema.validate(req.body);
+    const result = campgroundSchema.validate(req.body);
     if(result.error)
     {
       return next(new ExpressError(result.error,400));
@@ -48,7 +48,7 @@ function validateCampground(req,res,next) {
 }
 
 function validateReview(req,res,next) {
-    const result = ReviewSchema.validate(req.body);
+    const result = reviewSchema.validate(req.body);
     if(result.error)
     {
         return next(new ExpressError(result.error,400));
