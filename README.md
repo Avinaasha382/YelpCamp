@@ -31,4 +31,14 @@
     <li><strong>Manage Campgrounds</strong>: Edit or delete your own campgrounds and reviews.</li>
 </ul>
 
+<h2>Contributing</h2>
+<p>Contributions are welcome! Please fork the repository and submit a pull request for any enhancements or bug fixes.</p>
+
+<h2>Acknowledgments</h2>
+<ul>
+    <li>Colt Steele for the original course and project inspiration.</li>
+    <li>The open-source community for the amazing tools and libraries used in this project.</li>
+</ul>
+
+
 <h3>I have deployed the website using Render:  <a href = "https://yelpcamp-lv5y.onrender.com">Check it out!</a></h3>
