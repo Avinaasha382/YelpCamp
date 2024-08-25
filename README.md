@@ -12,6 +12,7 @@
   <li><b>Flash Messages:</b> Informative messages for users on successful or unsuccessful actions.</li>
   <li><b>Data Validation and Sanitization:</b> Ensure data integrity and security.</li>
   <li><b>Schema Validation and Error management: </b>Ensure integrity of schema using joi and proper error management using a user defined error class</li>
+  <li><b>Live Location Tracking: </b> Shows users the exact location on the campground and the locations of various campgrounds in the US.</li>
 </ul>
 
 <h2>Technologies Used</h2>
